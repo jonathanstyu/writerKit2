@@ -11,7 +11,7 @@
 
 @class RCTBridge;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSToolbarDelegate>
 
 @property (nonatomic, strong) NSWindow *window;
 @property (strong, nonatomic) NSArray<NSString *> *argv;

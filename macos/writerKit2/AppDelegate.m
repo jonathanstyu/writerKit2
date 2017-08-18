@@ -10,8 +10,12 @@
 #import "AppDelegate.h"
 
 #import <Cocoa/Cocoa.h>
+#import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTJavaScriptLoader.h>
+#import <React/RCTLinkingManager.h>
 #import <React/RCTRootView.h>
+#import <React/RCTEventDispatcher.h>
 
 @implementation AppDelegate
 
@@ -33,11 +37,17 @@
     NSWindowController *windowController = [[NSWindowController alloc] initWithWindow:self.window];
 
     [[self window] setTitleVisibility:NSWindowTitleHidden];
-    [[self window] setTitlebarAppearsTransparent:YES];
-    [[self window] setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameAqua]];
+    [[self window] setTitlebarAppearsTransparent:NO];
+    [[self window] setAppearance:[NSAppearance appearanceNamed:NSAppearanceNameVibrantLight]];
 
     [windowController setShouldCascadeWindows:NO];
     [windowController setWindowFrameAutosaveName:@"writerKit2"];
+    
+//    Init toolbar
+    NSToolbar *toolbar = [[NSToolbar alloc] initWithIdentifier:@"mainToolbar"];
+    [toolbar setDelegate:self];
+    [toolbar setSizeMode:NSToolbarSizeModeRegular];
+    [self.window setToolbar:toolbar];
 
     [windowController showWindow:self.window];
 
@@ -69,6 +79,11 @@
   [containerItem setSubmenu:rootMenu];
   [rootMenu addItemWithTitle:@"Quit writerKit2" action:@selector(terminate:) keyEquivalent:@"q"];
   [[NSApp mainMenu] addItem:containerItem];
+}
+
+- (void)setupMainMenu
+{
+  NSMenu *mainMenu = [[NSMenu alloc]initWithTitle:@"writerKit2"];
 }
 
 @end
